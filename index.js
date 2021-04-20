@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const connection = require('./database/database')
 
 const categoriesController = require('./Categories/CategoriesController')
@@ -13,6 +14,13 @@ const Category = require('./Categories/Category')
 const Users = require('./User/User')
 
 app.set('view engine','ejs')
+
+app.use(session({
+    secret: 'loremiss',
+    cookie:{
+        maxAge: 3000000
+    },
+}))
 
 app.use(express.static('public'))
 
